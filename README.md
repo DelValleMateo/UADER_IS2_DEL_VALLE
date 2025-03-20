@@ -20,7 +20,7 @@
 
 ## 📸 Ejemplo de Imagen
 
-![Ejemplo de Imagen](https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg)  
+![Foto](https://img2.wallspic.com/previews/4/1/4/8/5/158414/158414-universo-ambiente-el_espacio_exterior-objeto_astronomico-espacio-550x310.jpg)  
 
 ---
 
