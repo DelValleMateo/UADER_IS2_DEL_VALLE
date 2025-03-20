@@ -35,3 +35,6 @@ if __name__ == "__main__":
     primes = primes_in_range(lower, upper)
     print(f"Números primos entre {lower} y {upper}:")
     print(", ".join(map(str, primes)))
+
+    #Comentario para el tp1 modificacion
+    
