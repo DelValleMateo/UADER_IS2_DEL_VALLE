@@ -37,9 +37,10 @@
 #!/usr/bin/python
 """
 factorial.py
-Calcula el factorial de un número ingresado por el usuario.
+Calcula el factorial de un número o de un rango ingresado por el usuario.
 
 Autor: Dr.P.E.Colla (c) 2022
+Modificado por: [Tu Nombre]
 Licencia: Creative Commons
 """
 
@@ -48,7 +49,7 @@ import sys
 def factorial(n): 
     """Calcula el factorial de un número entero no negativo."""
     if n < 0: 
-        print("Error: El factorial de un número negativo no existe.")
+        print(f"Error: No se puede calcular el factorial de {n} porque es negativo.")
         return None
     fact = 1
     while n > 1:
@@ -59,17 +60,37 @@ def factorial(n):
 if __name__ == "__main__":
     # Verifica que se ingresó un argumento
     if len(sys.argv) < 2:
-        print("Debe informar un número!")
+        print("Debe informar un número o un rango!")
         sys.exit(1)
 
-    # Manejo de error al convertir argumento a entero
-    try:
-        numero = int(sys.argv[1])  # Se cambia 'num' por 'numero' para evitar redefiniciones
-    except ValueError:
-        print("Error: Debe ingresar un número entero válido.")
-        sys.exit(1)
+    entrada = sys.argv[1]
 
-    resultado = factorial(numero)
+    # Comprobar si es un rango (ejemplo: 4-8)
+    if "-" in entrada:
+        try:
+            inicio, fin = map(int, entrada.split("-"))
+            if inicio > fin:
+                print("Error: El inicio del rango no puede ser mayor que el final.")
+                sys.exit(1)
 
-    if resultado is not None:
-        print(f"Factorial {numero}! es {resultado}")
+            for num in range(inicio, fin + 1):
+                resultado = factorial(num)
+                if resultado is not None:
+                    print(f"Factorial {num}! = {resultado}")
+
+        except ValueError:
+            print("Error: Debe ingresar un rango válido en formato 'inicio-fin' (ejemplo: 4-8).")
+            sys.exit(1)
+    
+    else:
+        # Manejo de error al convertir argumento a entero
+        try:
+            numero = int(entrada)
+            resultado = factorial(numero)
+            if resultado is not None:
+                print(f"Factorial {numero}! = {resultado}")
+
+        except ValueError:
+            print("Error: Debe ingresar un número entero válido o un rango 'inicio-fin'.")
+            sys.exit(1)
+
