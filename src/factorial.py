@@ -65,32 +65,42 @@ if __name__ == "__main__":
 
     entrada = sys.argv[1]
 
-    # Comprobar si es un rango (ejemplo: 4-8)
-    if "-" in entrada:
-        try:
+    try:
+        # Caso: "-hasta" (ejemplo: "-10")
+        if entrada.startswith("-"):
+            fin = int(entrada[1:])  # Extrae el número después del "-"
+            if fin < 1:
+                print("Error: El número debe ser mayor o igual a 1.")
+                sys.exit(1)
+            inicio = 1  # Empieza desde 1
+            print(f"Calculando factoriales desde {inicio} hasta {fin}:")
+        
+        # Caso: "desde-" (ejemplo: "15-")
+        elif entrada.endswith("-"):
+            inicio = int(entrada[:-1])  # Extrae el número antes del "-"
+            if inicio > 60:
+                print("Error: El número debe ser menor o igual a 60.")
+                sys.exit(1)
+            fin = 60  # Llega hasta 60
+            print(f"Calculando factoriales desde {inicio} hasta {fin}:")
+
+        # Caso: "desde-hasta" (ejemplo: "4-8")
+        elif "-" in entrada:
             inicio, fin = map(int, entrada.split("-"))
             if inicio > fin:
                 print("Error: El inicio del rango no puede ser mayor que el final.")
                 sys.exit(1)
 
-            for num in range(inicio, fin + 1):
-                resultado = factorial(num)
-                if resultado is not None:
-                    print(f"Factorial {num}! = {resultado}")
+        # Caso: Un solo número (ejemplo: "5")
+        else:
+            inicio = fin = int(entrada)
 
-        except ValueError:
-            print("Error: Debe ingresar un rango válido en formato 'inicio-fin' (ejemplo: 4-8).")
-            sys.exit(1)
-    
-    else:
-        # Manejo de error al convertir argumento a entero
-        try:
-            numero = int(entrada)
-            resultado = factorial(numero)
+        # Calcular factoriales en el rango determinado
+        for num in range(inicio, fin + 1):
+            resultado = factorial(num)
             if resultado is not None:
-                print(f"Factorial {numero}! = {resultado}")
+                print(f"Factorial {num}! = {resultado}")
 
-        except ValueError:
-            print("Error: Debe ingresar un número entero válido o un rango 'inicio-fin'.")
-            sys.exit(1)
-
+    except ValueError:
+        print("Error: Entrada inválida. Debe ingresar un número entero o un rango válido.")
+        sys.exit(1)
