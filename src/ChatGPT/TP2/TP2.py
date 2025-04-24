@@ -3,7 +3,6 @@ import readline  # Usar pyreadline3 en Windows si hay error
 import together
 from dotenv import load_dotenv
 from openai import OpenAI
-
 # Cargar la API Key desde archivo .env
 load_dotenv()
 api_key = os.getenv("TOGETHER_API_KEY")
